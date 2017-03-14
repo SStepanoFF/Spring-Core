@@ -1,8 +1,5 @@
 package web_service;
 
-/**
- * Created by Sergii_Stepanov on 3/14/2017.
- */
 public class Greeting {
 
     private final long id;

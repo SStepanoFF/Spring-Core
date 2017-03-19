@@ -12,7 +12,11 @@ public class MainApp {
         // For using XmlBeanFactory
         // XmlBeanFactory context = new XmlBeanFactory(new ClassPathResource("Beans.xml"));
 
-        HelloWorld helloWorld = (HelloWorld) context.getBean("helloWorld");
-        helloWorld.getMessage();
+        HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
+        objA.setMessage("New message");
+        objA.getMessage();
+
+        HelloWorld objB = (HelloWorld) context.getBean("helloWorld");
+        objB.getMessage();
     }
 }

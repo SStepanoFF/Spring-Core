@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="client" class="epam.Client">
+        <constructor-arg index="0" type="java.lang.Integer" value="1"/>
+        <constructor-arg index="1" name="name" value="SergXML"/>
+    </bean>
+    <bean id="eventLogger" class="epam.loggers.ConsoleEventLogger"/>
+    <bean id="app" class="epam.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="cashFileEventLogger"/>
+    </bean>
+    <bean id="dateFormat" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
+        <constructor-arg type="java.lang.String" value="HH:mm dd-MM-yyyy"/>
+    </bean>
+    <!--<bean id="id" class="java.util.Random"  ="nextInt"/>-->
+    <bean id="event" class="epam.Event" scope="prototype">
+        <!--<constructor-arg value="1"/>-->
+        <constructor-arg>
+            <bean class="java.time.LocalDateTime" factory-method="now"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+    <bean id="fileEventLogger" class="epam.loggers.FileEventLogger" init-method="init">
+        <constructor-arg type="java.lang.String" value="Logger.txt"/>
+    </bean>
+    <bean id="cashFileEventLogger" class="epam.loggers.CashFileEventLogger" destroy-method="destroy">
+        <constructor-arg type="java.lang.String" value="Logger.txt"/>
+        <constructor-arg type="java.lang.Integer" value="3"/>
+    </bean>
+
+</beans>

@@ -18,3 +18,5 @@ hs_err_pid*
 
 /target/
 /.idea/
+/spring-core.ipr
+/spring-core.iml

@@ -7,10 +7,10 @@ public class MainApp {
 
     public static void main(String[] args) {
         // For using ApplicationContext
-        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("beansWeb.xml");
 
         // For using XmlBeanFactory
-        // XmlBeanFactory context = new XmlBeanFactory(new ClassPathResource("Beans.xml"));
+        // XmlBeanFactory context = new XmlBeanFactory(new ClassPathResource("beansWeb.xml"));
 
         HelloWorld objA = (HelloWorld) context.getBean("helloWorld");
         objA.setMessage("New message");

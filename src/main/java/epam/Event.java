@@ -8,8 +8,7 @@ import lombok.Setter;
 
 public class Event {
 
-    //    private AtomicInteger counter = new AtomicInteger();
-    String datePattern = "HH:mm dd:mm:yyyy";
+    @Setter
     private int id;
     @Setter
     private String msg;
@@ -27,7 +26,4 @@ public class Event {
         return "Id = " + id + ":  Date is: " + date.format(dtFormatter) + ": Message is: " + msg;
     }
 
-//    private int getId() {
-//        return
-//    }
 }

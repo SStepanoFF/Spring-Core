@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!--default-lazy-init="true" - create bean after getBean()-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="event" class="epam.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.time.LocalDateTime" factory-method="now"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+    <bean id="dateFormat" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
+        <constructor-arg type="java.lang.String" value="HH:mm dd-MM-yyyy"/>
+    </bean>
+
+    <bean id="consoleEventLogger" class="epam.loggers.ConsoleEventLogger"/>
+    <bean id="fileEventLogger" class="epam.loggers.FileEventLogger" init-method="init">
+        <constructor-arg type="java.lang.String" value="log.txt"/>
+    </bean>
+    <bean id="cashFileEventLogger" class="epam.loggers.CashFileEventLogger" parent="fileEventLogger"
+          destroy-method="destroy">
+        <constructor-arg type="java.lang.Integer" value="3"/>
+    </bean>
+</beans>

@@ -17,7 +17,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        context = new ClassPathXmlApplicationContext("BeanEpam.xml");
+        context = new ClassPathXmlApplicationContext("beanEpam.xml");
         App app = (App) context.getBean("app");
         IEventLogger iEventLogger = app.eventLogger;
 

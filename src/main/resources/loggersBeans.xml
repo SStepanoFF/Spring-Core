@@ -6,7 +6,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
+    <bean id="random" class="java.util.Random"/>
     <bean id="event" class="epam.Event" scope="prototype">
+        <constructor-arg>
+            <bean id="setId" factory-bean="random" factory-method="nextInt">
+                <constructor-arg value="10"/>
+            </bean>
+        </constructor-arg>
         <constructor-arg>
             <bean class="java.time.LocalDateTime" factory-method="now"/>
         </constructor-arg>
@@ -23,5 +29,13 @@
     <bean id="cashFileEventLogger" class="epam.loggers.CashFileEventLogger" parent="fileEventLogger"
           destroy-method="destroy">
         <constructor-arg type="java.lang.Integer" value="3"/>
+    </bean>
+    <bean id="combinedEventLogger" class="epam.loggers.CombinedEventLogger">
+        <constructor-arg>
+            <list>
+                <ref bean="consoleEventLogger"/>
+                <ref bean="fileEventLogger"/>
+            </list>
+        </constructor-arg>
     </bean>
 </beans>

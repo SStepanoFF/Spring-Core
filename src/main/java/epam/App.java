@@ -37,13 +37,6 @@ public class App {
         context.close();
     }
 
-    // private void logEvent(String message) {
-    // Event event = (Event) context.getBean("event");
-    // String msg = message.replaceAll(String.valueOf(client.getId()), client.getName());
-    // event.setMsg(client.getGreeting() + msg);
-    // defaultLogger.logEvent(event);
-    // }
-
     private void logEvent(Event.EventType eventType, String message) {
         IEventLogger logger = Optional.ofNullable(loggers.get(eventType)).orElse(defaultLogger);
         Event event = (Event) context.getBean("event");

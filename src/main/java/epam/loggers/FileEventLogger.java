@@ -3,6 +3,8 @@ package epam.loggers;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.io.FileUtils;
 
 import epam.Event;
@@ -26,6 +28,7 @@ public class FileEventLogger implements IEventLogger {
         }
     }
 
+    @PostConstruct
     public boolean init() throws IOException {
         return file.canWrite();
     }

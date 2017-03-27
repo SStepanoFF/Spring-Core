@@ -3,6 +3,8 @@ package epam;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,7 +14,10 @@ public class App {
 
     private static ConfigurableApplicationContext context;
     Map<Event.EventType, IEventLogger> loggers;
+    @Autowired
     private Client client;
+    @Autowired
+    @Qualifier("cashFileEventLogger")
     private IEventLogger defaultLogger;
 
     public App(Client client, IEventLogger eventLogger, Map<Event.EventType, IEventLogger> loggers) {
@@ -26,7 +31,7 @@ public class App {
         App app = (App) context.getBean("app");
 
         app.logEvent(Event.EventType.INFO, "Event for user 1");
-        app.logEvent(Event.EventType.LOG, "Event for user 2");
+        app.logEvent(null, "Event for user 2");
         app.logEvent(Event.EventType.ERROR, "Event for user 3");
         app.logEvent(Event.EventType.LOG, "Event for user 4");
         context.close();

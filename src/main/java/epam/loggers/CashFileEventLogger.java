@@ -3,6 +3,8 @@ package epam.loggers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
+
 import epam.Event;
 
 public class CashFileEventLogger extends FileEventLogger {
@@ -28,6 +30,7 @@ public class CashFileEventLogger extends FileEventLogger {
         cash.forEach(event -> super.logEvent(event));
     }
 
+    @PreDestroy
     private void destroy() {
         if (!cash.isEmpty()) {
             writeEventsFromCash();
